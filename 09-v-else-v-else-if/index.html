@@ -10,14 +10,12 @@
     <div id="appdiv">
         <h1>Guitars</h1>
         <div class="guitars">
-            <!-- <div v-for="guitar in guitars" :key="guitar.id">
-                <h2 v-if="guitar.stock > 0">{{ guitar.name }}</h2>
-            </div>   Div megoldas torles nelkul-->
-
-            <template v-for="guitar in guitars" :key="guitar.id">
-                <h2 v-show="guitar.stock > 0">{{ guitar.name }}</h2>
-            </template>
-
+            <div v-for="guitar in guitars" :key="guitar.id">
+                <h2>{{guitar.name}}</h2>
+                <span v-if="guitar.stock === 0" style="color: red;">Out of Stock</span>
+                <span v-else-if="guitar.stock < 3" style="color: orange;">Last chance, only {{guitar.stock}} left</span>
+                <span v-else style="color: green;">In Stock</span>
+            </div>
         </div>
 
     </div>
