@@ -5,36 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PixelBolt — összefoglaló feladat</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 24px; }
-    ul { list-style: none; padding-left: 16px; }
-    li { margin: 6px 0; }
-    .termek-sor { display: flex; justify-content: space-between; gap: 12px; max-width: 420px; }
-    .termek-ar { color: #333; font-weight: bold; }
+    :root { color-scheme: light; --text: #202635; --muted: #626b7d; --blue: #2864df; --glass: rgba(255,255,255,.58); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+    body { margin: 0; min-width: 320px; color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif; background: #edf0f8; -webkit-font-smoothing: antialiased; }
+    body::before { content: ""; position: fixed; inset: 0; z-index: -1; background: radial-gradient(ellipse at 12% 12%, #d0c5fc 0, transparent 45%), radial-gradient(ellipse at 88% 38%, #bbdef9 0, transparent 45%), radial-gradient(ellipse at 45% 95%, #f8dce9 0, transparent 50%); }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+    #app { max-width: 1140px; margin: auto; padding: 24px 32px 48px; }
+    .glass-nav, .section-box, .hero-art { background: var(--glass); border: 1px solid rgba(255,255,255,.85); box-shadow: inset 0 1px 0 #fff, 0 12px 40px rgba(54,65,111,.06); backdrop-filter: blur(24px) saturate(150%); -webkit-backdrop-filter: blur(24px) saturate(150%); }
+    .glass-nav { position: sticky; top: 16px; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 15px 22px; border-radius: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 750; letter-spacing: -.6px; }
+    .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; background: #252d40; color: white; font-size: 17px; }
+    .nav-links { display: flex; gap: 24px; font-size: 13px; font-weight: 500; color: #535d71; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .hero { display: grid; grid-template-columns: 1.35fr 1fr; align-items: center; gap: 40px; padding: 70px 24px 62px; }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #65728e; }
+    h1 { font-size: clamp(3.4rem, 7vw, 5.8rem); line-height: 1.05; letter-spacing: -.075em; margin: 16px 0; font-weight: 750; }
+    .slogan { font-size: clamp(20px, 3vw, 27px); letter-spacing: -.04em; margin: 0 0 22px; }
+    p { color: var(--muted); line-height: 1.65; }
+    .welcome { max-width: 360px; font-size: 14px; }
+    .welcome strong { color: var(--text); }
+    .welcome em { font-style: normal; color: #345dc3; }
+    .hero-link { display: inline-flex; align-items: center; gap: 24px; margin-top: 18px; padding: 13px 21px; background: #2870e8; color: white; border-radius: 999px; font-size: 13px; font-weight: 600; box-shadow: 0 6px 18px #2864df26, inset 0 1px 0 #ffffff40; transition: transform .25s, box-shadow .25s; }
+    .hero-link:hover { transform: translateY(-3px); box-shadow: 0 10px 24px #2864df40; }
+    .hero-art { position: relative; display: grid; place-items: center; min-height: 285px; border-radius: 48px; transform: rotate(-6deg); background: linear-gradient(135deg, #ffffffb3, #ffffff26); }
+    .hero-art::before { content: ""; position: absolute; width: 160px; height: 160px; border-radius: 50%; background: #7da9ef; filter: blur(50px); opacity: .4; }
+    .hero-art img { position: relative; width: 145px; height: 145px; object-fit: contain; filter: drop-shadow(0 18px 12px #314d7c25); animation: float 6s ease-in-out infinite; }
+    .art-caption { position: absolute; bottom: 24px; font-size: 10px; letter-spacing: .18em; color: #5d6e86; }
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .section-box { padding: 26px; border-radius: 28px; min-width: 0; }
+    h2 { margin: 0 0 20px; font-size: 20px; letter-spacing: -.04em; font-weight: 650; }
+    .section-label { display: block; margin-bottom: 8px; font-size: 10px; color: #768095; font-weight: 650; letter-spacing: .14em; text-transform: uppercase; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    .featured-list { counter-reset: featured; }
+    .featured-list > li { display: flex; align-items: center; gap: 14px; padding: 13px 0; font-size: 14px; font-weight: 550; }
+    .featured-list > li::before { counter-increment: featured; content: "0" counter(featured); display: grid; place-items: center; width: 37px; height: 37px; flex-shrink: 0; border-radius: 12px; color: #63749c; background: #ffffff80; border: 1px solid #fff; font-size: 11px; }
+    .polc-item { padding: 12px 0; border-bottom: 1px solid #8794b31a; }
+    .polc-item:last-child { border: 0; }
+    .polc-nev { font-size: 12px; font-weight: 650; color: #53658b; }
+    .termek-lista { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .termek-lista li { font-size: 11px; padding: 5px 9px; background: #ffffff80; border: 1px solid #ffffffb3; border-radius: 8px; color: #59657b; }
+    .available { grid-column: 1 / -1; display: flex; align-items: center; gap: 24px; padding: 20px 26px; }
+    .available h2 { font-size: 13px; white-space: nowrap; margin: 0; }
+    .available h2::before { content: ""; display: inline-block; width: 6px; height: 6px; background: #27845f; border-radius: 50%; margin-right: 8px; box-shadow: 0 0 0 4px #27845f12; }
+    .available ul { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+    .available li { font-size: 12px; color: #626b7d; }
+    .catalog { grid-column: 1 / -1; }
+    .catalog > ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .catalog > ul > li { padding: 22px 18px; background: #ffffff65; border: 1px solid #ffffffc4; border-radius: 19px; transition: transform .25s, background .25s, box-shadow .25s; }
+    .catalog > ul > li:hover { transform: translateY(-4px); background: #ffffffac; box-shadow: 0 12px 24px #4d598c12; }
+    .termek-sor { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; font-size: 14px; font-weight: 600; }
+    .termek-ar { font-size: 23px; font-weight: 650; letter-spacing: -.05em; }
+    .stock { margin-top: 13px; font-size: 11px; line-height: 1.5; }
+    .stock span { display: inline-block; padding: 4px 8px; border-radius: 6px; background: #fff9; }
+    .stock .sold-out { color: #9b4148 !important; }
+    .stock .low-stock { color: #896018 !important; }
+    .stock .in-stock { color: #247152 !important; }
+    footer { text-align: center; margin-top: 30px; font-size: 11px; color: #69748a; letter-spacing: .02em; }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(6deg); } 50% { transform: translateY(-12px) rotate(10deg); } }
+    @media (max-width: 760px) { #app { padding: 16px 18px 30px; } .hero { gap: 22px; padding: 50px 8px 40px; } .hero-art { min-height: 220px; border-radius: 34px; } .hero-art img { width: 110px; height: 110px; } .catalog > ul { grid-template-columns: repeat(2, 1fr); } .available { align-items: flex-start; flex-direction: column; gap: 15px; } }
+    @media (max-width: 520px) { .glass-nav { padding: 14px 16px; border-radius: 19px; } .nav-links { gap: 14px; font-size: 11px; } .hero { grid-template-columns: 1fr; } .hero-art { min-height: 190px; margin: 10px 22px; } .hero-art img { width: 100px; height: 100px; } .content-grid { grid-template-columns: 1fr; gap: 14px; } .section-box { padding: 22px; } .catalog > ul { grid-template-columns: 1fr; } .termek-sor { flex-direction: row; justify-content: space-between; align-items: center; gap: 10px; } .termek-ar { font-size: 20px; white-space: nowrap; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
   </style>
-</head>
 <script src="https://unpkg.com/vue@3"></script>
+</head>
 <body>
   <div id="app">
-    <h1 :title="tooltip">{{ shopName }}</h1>
-    <p>{{ slogan }}</p>
+    <nav class="glass-nav" aria-label="Fő navigáció">
+      <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">P</span>{{ shopName }}</a>
+      <div class="nav-links"><a href="#kiemeltek">Kiemeltek</a><a href="#kinalat">Kínálat <span aria-hidden="true">↗</span></a></div>
+    </nav>
+    <header class="hero">
+      <div>
+        <span class="eyebrow">Technológia. A te világodhoz.</span>
+        <h1 :title="tooltip">{{ shopName }}</h1>
+        <p class="slogan">{{ slogan }}</p>
+        <p class="welcome" v-html="welcomeHtml"></p>
+        <a class="hero-link" href="#kinalat">Fedezd fel a kínálatot <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-art"><img v-bind="logo" :alt="shopName"><span class="art-caption">EGY KIS PLUSZ. MINDEN NAP.</span></div>
+    </header>
+    <main class="content-grid">
 
-    <p v-html="welcomeHtml"></p>
-
-    <img v-bind="logo" :alt="shopName">
-
-    <div>
-      <ul>
+    <div class="section-box" id="kiemeltek">
+      <span class="section-label">Válogatás neked</span><h2>A kedvenceid, egy helyen.</h2>
+      <ul class="featured-list">
         <li v-for="(kiemelt, index) in kiemeltek" :key="`kiemeltek-${index}`">
-          {{ index + 1 }}. {{ kiemelt.name }}
+          {{ kiemelt.name }}
         </li>
       </ul>
     </div>
 
-    <div>
-      <ul>
-        <li v-for="(polc, polcIndex) in polcok" :key="`polc-${polcIndex}`">
-          {{ polcIndex + 1 }}. polc
-          <ul>
+    <div class="section-box"><span class="section-label">Minden a helyén</span><h2>Találd meg a hozzád illőt.</h2><ul>
+        <li v-for="(polc, polcIndex) in polcok" :key="`polc-${polcIndex}`" class="polc-item">
+          <span class="polc-nev">{{ polcIndex + 1 }}. polc</span>
+          <ul class="termek-lista">
             <li v-for="(termek, termekIndex) in polc" :key="`termek-${polcIndex}-${termekIndex}`">
               {{ termek }}
             </li>
@@ -43,7 +110,7 @@
       </ul>
     </div>
 
-    <section>
+    <section class="section-box available">
       <h2>Most kapható</h2>
       <ul>
         <template v-for="termek in termekek" :key="termek.id">
@@ -52,26 +119,27 @@
       </ul>
     </section>
 
-    <section>
-      <h2>Teljes kínálat</h2>
+    <section class="section-box catalog" id="kinalat">
+      <span class="section-label">A következő kedvenced</span><h2>Teljes kínálat</h2>
       <ul>
         <li v-for="termek in termekek" :key="termek.id">
           <div class="termek-sor">
             <span>{{ termek.name }}</span>
             <span class="termek-ar">{{ termek.ar.toLocaleString('hu-HU') }} Ft</span>
           </div>
-          <div>
-            <span v-if="termek.keszlet === 0" :style="{ color: elfogyottSzin }">Elfogyott</span>
-            <span v-else-if="termek.keszlet < 3" :style="{ color: utolsoDarabSzin }">
+          <div class="stock">
+            <span class="sold-out" v-if="termek.keszlet === 0" :style="{ color: elfogyottSzin }">Elfogyott</span>
+            <span class="low-stock" v-else-if="termek.keszlet < 3" :style="{ color: utolsoDarabSzin }">
               Utolsó darabok, csak {{ termek.keszlet }} db van
             </span>
-            <span v-else :style="{ color: raktaronSzin }">
+            <span class="in-stock" v-else :style="{ color: raktaronSzin }">
               Raktáron
             </span>
           </div>
         </li>
       </ul>
     </section>
+    </main><footer>PixelBolt · A te infós webshopod</footer>
   </div>
 
   <script src="main.js"></script>
