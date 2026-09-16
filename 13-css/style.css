@@ -1,0 +1,14 @@
+ .out-of-Stock{
+    color: red;
+    font-size: 1.25rem;
+}
+
+.only-Few-Left{
+    color: orange;
+    font-size: 1.5rem;
+}
+
+.in-Stock{
+    color: green;
+    font-size: 1rem;
+}
