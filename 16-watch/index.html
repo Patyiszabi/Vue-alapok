@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Init Vue App</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="appdiv">
+        <h1>Price</h1>
+        <button @click="decrement">-</button>
+        <p>Price: {{ formatPrice }}</p>
+        <button @click="increment">+</button>
+        <p v-if="errormessage">{{ errormessage }}</p>
+        <p>Money: {{ formatMoney }}</p>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
