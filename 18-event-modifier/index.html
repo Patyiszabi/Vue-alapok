@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A little introduction</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="appdiv">
+        <div class="brand">a. <span>THE ART OF CONNECTION</span></div>
+        <main class="form-card">
+        <section class="intro">
+            <span class="eyebrow">GOOD THINGS START HERE</span>
+            <h1>A little hello.<br>A new <em>beginning.</em></h1>
+            <p>Every connection starts with an introduction. Let’s make yours.</p>
+            <svg class="artwork" aria-hidden="true" viewBox="0 0 320 220" fill="none"><path d="M55 190C55 100 115 45 160 45C205 45 265 100 265 190M80 190C80 115 125 70 160 70C195 70 240 115 240 190M105 190C105 130 135 95 160 95C185 95 215 130 215 190M130 190C130 145 145 120 160 120C175 120 190 145 190 190M32 190H288" stroke="currentColor"/><circle cx="241" cy="55" r="26" fill="currentColor"/></svg>
+            <small>● &nbsp; A small step toward something good.</small>
+        </section>
+        <form action="" @submit.prevent="submit()">
+            <header><span class="eyebrow">NICE TO MEET YOU</span><h2>Your introduction</h2><p>Just a couple of details to get started.</p></header>
+            <div class="form-group">
+                <label for="name">Full name <span>01</span></label>
+                <input type="text" id="name" name="name" v-model="name" placeholder="e.g. Alex Morgan" autocomplete="name" required>
+                <p class="preview" v-if="name" v-cloak>Hello, {{ name }}.</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email address <span>02</span></label>
+                <input type="email" id="email" name="email" v-model="email" placeholder="you@example.com" autocomplete="email" required>
+                <p class="preview" v-if="email" v-cloak>{{ email }}</p>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Send introduction <span aria-hidden="true">↗</span></button>
+                <p class="form-note">A simple hello goes a long way.</p>
+            </div>
+        </form>
+        </main>
+        <footer>MADE FOR MEANINGFUL CONNECTIONS &nbsp; ✳ &nbsp; ONE HELLO AT A TIME</footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

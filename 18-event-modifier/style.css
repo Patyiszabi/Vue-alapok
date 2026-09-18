@@ -1,0 +1,54 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+:root { font-family: 'DM Sans', sans-serif; color: #243c33; background: #f5f3ed; font-synthesis: none; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+[v-cloak] { display: none; }
+body { margin: 0; min-width: 320px; }
+#appdiv { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; max-width: 1100px; margin: auto; padding: 48px 40px; }
+.brand { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; font: italic 35px Georgia, serif; }
+.brand span { font: 700 10px 'DM Sans', sans-serif; letter-spacing: 2px; }
+.form-card { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid #e2e3d9; border-radius: 20px; background: #fffefa; box-shadow: 0 24px 65px -35px #35493840; }
+.intro { padding: 48px 44px 34px; background: #e8ecdf; }
+.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2px; }
+h1, h2 { font-family: 'Playfair Display', Georgia, serif; font-weight: 500; }
+h1 { font-size: clamp(35px, 4vw, 47px); line-height: 1.2; letter-spacing: -1.6px; margin: 25px 0 19px; }
+h1 em { color: #627554; }
+.intro p { max-width: 290px; font-size: 14px; line-height: 1.8; color: #627062; margin: 0; }
+.artwork { display: block; width: 100%; max-width: 300px; margin: 16px auto 10px; color: #849474; }
+.intro small { font-size: 10px; color: #627062; }
+form { display: flex; flex-direction: column; justify-content: center; padding: 48px; }
+header { margin-bottom: 32px; }
+header .eyebrow { color: #717967; }
+h2 { font-size: 29px; letter-spacing: -.7px; margin: 12px 0 10px; }
+header p { font-size: 13px; line-height: 1.6; color: #73796d; margin: 0; }
+.form-group { margin-bottom: 24px; min-width: 0; }
+.form-group:last-child { margin: 8px 0 0; }
+label { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+label span { font-size: 10px; color: #7b8271; font-weight: 400; }
+input { width: 100%; min-height: 51px; border: 1px solid #dfe2d8; border-radius: 8px; background: #fbfbf7; padding: 14px 15px; font: inherit; font-size: 14px; color: #243c33; transition: border-color .2s, box-shadow .2s, background .2s; }
+input::placeholder { color: #858b7e; }
+input:hover { border-color: #a8b29d; }
+input:focus { outline: none; border-color: #6c8261; box-shadow: 0 0 0 3px #6c82611a; background: #fff; }
+.preview { margin: 8px 0 0; font-size: 11px; color: #617456; overflow-wrap: anywhere; }
+button { display: flex; justify-content: space-between; align-items: center; width: 100%; min-height: 52px; padding: 14px 19px; border: 0; border-radius: 8px; background: #294a3b; color: #fffefa; font: 500 13px 'DM Sans', sans-serif; cursor: pointer; transition: background .2s, transform .2s, box-shadow .2s; }
+button span { font-size: 22px; line-height: 1; }
+button:hover { background: #365d49; transform: translateY(-2px); box-shadow: 0 6px 15px #294a3b20; }
+button:active { transform: translateY(0); }
+button:focus-visible { outline: 3px solid #849474; outline-offset: 4px; }
+.form-note { text-align: center; font-size: 10px; color: #737b69; margin: 16px 0 0; }
+footer { text-align: center; margin-top: 29px; font-size: 8px; line-height: 1.8; letter-spacing: 1.6px; color: #737b69; }
+@media (max-width: 720px) {
+    #appdiv { padding: 28px 20px; }
+    .brand { margin-bottom: 22px; }
+    .form-card { grid-template-columns: 1fr; }
+    .intro { padding: 32px; }
+    h1 { font-size: 39px; }
+    .artwork { display: none; }
+    .intro small { display: block; margin-top: 24px; }
+    form { padding: 32px; }
+    footer { font-size: 7px; letter-spacing: .6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    input, button { transition: none; }
+    button:hover { transform: none; }
+}
